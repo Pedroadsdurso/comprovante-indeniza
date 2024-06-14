@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&amp;display=swap" rel="stylesheet">
+    
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <div style="position: relative;">
+
+        <img style="width: 335px; height: 400px;" src="images/R_71.png" alt="">
+
+        <p id="cpf" style="position: absolute; 
+                        bottom: 106px; 
+                        left: 13px;
+                        font-size: 10px;
+                        font-weight: 750;
+                        font-family: 'Open Sans'">{{cpf}}</p>
+
+        <p id="nome" style="position: absolute; 
+                  bottom: 147px; 
+                  left: 13px;
+                  font-size: 10px;
+                  font-weight: 750;
+                  font-family: 'Open Sans'">{{nome}}</p>
+
+        <p id="data" style="position: absolute; 
+                  bottom: 25px; 
+                  left: 13px;
+                  font-size: 10px;
+                  font-weight: 750;
+                  font-family: 'Open Sans'">14/6/2024</p>
+
+        <p id="data/hora" style="position: absolute; 
+                  bottom: 266px; 
+                  left: 226px;
+                  font-size: 11px;
+                  font-weight: 750;
+                  font-family: 'Open Sans';
+                  color:#d81d7e;">14/6/2024</p>
+</div>
+
+
+<script>
+    const data = new Date()
+    let day = data.getDate()
+    let month = data.getMonth() + 1
+    let year = data.getFullYear()
+    let hours = data.getHours()
+    let minutes = data.getMinutes()
+
+    const dataHtml = document.getElementById('data')
+    const dataAndHour = document.getElementById('data/hora')
+
+    dataHtml.innerHTML = `${day}/${month}/${year}`
+  dataAndHour.innerHTML = `${day}/${month}/${year}`
+
+    var query = location.search.slice(1)
+    var partes = query.split('&')
+    var dataUrl = {}
+
+    partes.forEach(function (parte) {
+        var chaveValor = parte.split('=')
+        var chave = chaveValor[0]
+        var valor = chaveValor[1]
+        dataUrl[chave] = valor
+    })
+// Decodifique o texto antes de definir o innerHTML
+const cpf = document.getElementById('cpf')
+const nome = document.getElementById('nome')
+
+// Se o valor tiver sido codificado em URL, use decodeURIComponent para decodificar
+const decodedCPF = decodeURIComponent(dataUrl.cpf)
+const decodedNome = decodeURIComponent(dataUrl.nome.substring(0, 20))
+
+cpf.innerHTML = decodedCPF
+nome.innerHTML = decodedNome
+</script>
+
+</body></html>
